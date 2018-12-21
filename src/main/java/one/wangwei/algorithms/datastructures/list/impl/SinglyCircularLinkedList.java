@@ -6,7 +6,7 @@ import one.wangwei.algorithms.datastructures.list.IList;
  * 单向循环链表
  *
  * @param <T>
- * @author wangwei
+ * @author https://wangwei.one
  * @date 2018/05/03
  */
 public class SinglyCircularLinkedList<T> implements IList<T> {

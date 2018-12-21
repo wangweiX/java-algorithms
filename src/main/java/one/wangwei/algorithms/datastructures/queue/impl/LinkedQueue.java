@@ -6,7 +6,7 @@ import one.wangwei.algorithms.datastructures.queue.IQueue;
  * 链表队列
  *
  * @param <T>
- * @author wangwei
+ * @author https://wangwei.one
  * @date 2018/05/07
  */
 public class LinkedQueue<T> implements IQueue<T> {

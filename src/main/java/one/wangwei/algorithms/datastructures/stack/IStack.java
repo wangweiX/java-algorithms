@@ -4,7 +4,7 @@ package one.wangwei.algorithms.datastructures.stack;
 /**
  * 栈
  *
- * @author wangwei
+ * @author https://wangwei.one
  * @date 2018/05/04
  */
 public interface IStack<T> {

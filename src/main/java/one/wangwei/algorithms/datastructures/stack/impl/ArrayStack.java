@@ -8,7 +8,7 @@ import java.util.Arrays;
  * 顺序栈
  *
  * @param <T>
- * @author wangwei
+ * @author https://wangwei.one
  * @date 2018/05/04
  */
 public class ArrayStack<T> implements IStack<T> {

@@ -6,7 +6,7 @@ import one.wangwei.algorithms.datastructures.stack.IStack;
  * 链表栈
  *
  * @param <T>
- * @author wangwei
+ * @author https://wangwei.one
  * @date 2018/05/04
  */
 public class LinkedStack<T> implements IStack<T> {

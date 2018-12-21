@@ -6,7 +6,7 @@ import one.wangwei.algorithms.datastructures.list.IList;
  * 双向链表结构
  *
  * @param <T>
- * @author wangwei
+ * @author https://wangwei.one
  * @date 2018/04/28
  */
 public class DoublyLinkedList<T> implements IList<T> {

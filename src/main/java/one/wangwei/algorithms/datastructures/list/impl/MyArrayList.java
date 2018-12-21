@@ -8,7 +8,7 @@ import java.util.Arrays;
  * 顺序表
  *
  * @param <T>
- * @author wangwei
+ * @author https://wangwei.one
  * @date 2018/04/27
  */
 public class MyArrayList<T> implements IList<T> {
