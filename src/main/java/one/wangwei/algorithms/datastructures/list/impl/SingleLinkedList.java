@@ -24,6 +24,9 @@ public class SingleLinkedList<T> implements IList<T> {
      */
     private Node<T> tail = null;
 
+    public SingleLinkedList() {
+    }
+
     /**
      * 添加元素
      *
@@ -44,7 +47,7 @@ public class SingleLinkedList<T> implements IList<T> {
      */
     @Override
     public boolean add(int index, T element) {
-        checkElementIndex(index);
+        checkPositionIndex(index);
         if (index == size) {
             return add(element);
         } else {
@@ -79,6 +82,7 @@ public class SingleLinkedList<T> implements IList<T> {
      * @return
      */
     private boolean addBefore(int index, T element) {
+        checkPositionIndex(index);
         int prevIndex = index - 1;
         Node<T> prev = prevIndex < 0 ? null : node(prevIndex);
 
@@ -125,7 +129,7 @@ public class SingleLinkedList<T> implements IList<T> {
      */
     @Override
     public T remove(int index) {
-        checkElementIndex(index);
+        checkPositionIndex(index);
 
         int prevIndex = index - 1;
         Node<T> prev = prevIndex < 0 ? null : node(prevIndex);
@@ -161,7 +165,7 @@ public class SingleLinkedList<T> implements IList<T> {
      * @return
      */
     private Node<T> node(int index) {
-        checkElementIndex(index);
+        checkPositionIndex(index);
         Node<T> x = head;
         for (int i = 0; i < index; i++) {
             x = x.next;
@@ -216,8 +220,8 @@ public class SingleLinkedList<T> implements IList<T> {
         return true;
     }
 
-    private void checkElementIndex(int index) {
-        if (index < 0 || index >= size) {
+    private void checkPositionIndex(int index) {
+        if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
         }
     }
@@ -231,7 +235,7 @@ public class SingleLinkedList<T> implements IList<T> {
      */
     @Override
     public T set(int index, T element) {
-        checkElementIndex(index);
+        checkPositionIndex(index);
         Node<T> oldNode = node(index);
         T oldElement = oldNode.element;
         oldNode.element = element;
