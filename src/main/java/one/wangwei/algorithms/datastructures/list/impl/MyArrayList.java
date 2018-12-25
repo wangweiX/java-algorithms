@@ -14,15 +14,19 @@ import java.util.Arrays;
 public class MyArrayList<T> implements IList<T> {
 
     /**
-     * 默认大小
+     * default array size
      */
-    private static final int DEFAULT_SIZE = 10;
+    private final int DEFAULT_SIZE = 10;
 
-    private int size = 0;
     /**
-     * 初始化一个默认数组
+     * array size
      */
-    private transient T[] array = (T[]) new Object[DEFAULT_SIZE];
+    private int size = 0;
+
+    /**
+     * array
+     */
+    private T[] array = (T[]) new Object[DEFAULT_SIZE];
 
     /**
      * 添加元素
@@ -36,7 +40,7 @@ public class MyArrayList<T> implements IList<T> {
     }
 
     /**
-     * 添加元素
+     * 在index处添加元素
      *
      * @param index
      * @param element
@@ -44,53 +48,45 @@ public class MyArrayList<T> implements IList<T> {
      */
     @Override
     public boolean add(int index, T element) {
-        // 扩容
+        if (index < 0 || index > size) {
+            throw new ArrayIndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+        }
+        // 先进行扩容判断
         if (size >= array.length) {
             grow();
         }
-        if (index == size) {
-            array[size] = element;
-        } else {
+        // 插入操作，复制array
+        if (index < size) {
             System.arraycopy(array, index, array, index + 1, size - index);
-            array[index] = element;
         }
+        array[index] = element;
         size++;
         return true;
     }
 
     /**
-     * 扩容
+     * grow 50%
      */
     private void grow() {
-        int growSize = size + (size << 1);
+        int growSize = size + (size >> 1);
         array = Arrays.copyOf(array, growSize);
     }
 
     /**
-     * 缩减
-     */
-    private void shrink() {
-        int shrinkSize = array.length >> 1;
-        array = Arrays.copyOf(array, shrinkSize);
-    }
-
-    /**
-     * 移除第一个匹配的元素
+     * 移除元素
      *
      * @param element
      * @return
      */
     @Override
     public boolean remove(T element) {
-        if (element == null) {
-            for (int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++) {
+            if (element == null) {
                 if (array[i] == null) {
                     remove(i);
                     return true;
                 }
-            }
-        } else {
-            for (int i = 0; i < size; i++) {
+            } else {
                 if (array[i].equals(element)) {
                     remove(i);
                     return true;
@@ -101,7 +97,7 @@ public class MyArrayList<T> implements IList<T> {
     }
 
     /**
-     * 删除 index 位置上元素
+     * 删除 index 位置上的元素
      *
      * @param index
      * @return
@@ -111,20 +107,32 @@ public class MyArrayList<T> implements IList<T> {
         if (index < 0 || index >= size) {
             throw new ArrayIndexOutOfBoundsException("Index: " + index + ", Size: " + size);
         }
-        T element = array[index];
-        if (index != --size) {
-            System.arraycopy(array, index + 1, array, index, size - index);
+        T oldElement = array[index];
+        // 判断是否需要进行数组复制
+        if (index != (size - 1)) {
+            System.arraycopy(array, index + 1, array, index, size - index - 1);
         }
+        // size减1
+        --size;
         array[size] = null;
-        int shrinkSize = array.length >> 1;
+        // shrink 25%
+        int shrinkSize = size - (size >> 1 >> 1);
         if (shrinkSize >= DEFAULT_SIZE && shrinkSize > size) {
             shrink();
         }
-        return element;
+        return oldElement;
     }
 
     /**
-     * 设置索引值
+     * 压缩25%
+     */
+    private void shrink() {
+        int shrinkSize = size - (size >> 1 >> 1);
+        array = Arrays.copyOf(array, shrinkSize);
+    }
+
+    /**
+     * 设置index上的元素
      *
      * @param index
      * @param element
@@ -141,7 +149,7 @@ public class MyArrayList<T> implements IList<T> {
     }
 
     /**
-     * 清空元素
+     * 清空list集合
      */
     @Override
     public void clear() {
@@ -152,24 +160,14 @@ public class MyArrayList<T> implements IList<T> {
     }
 
     /**
-     * 检查是否包含某个元素
+     * 判断是否包含某个元素
      *
      * @param element
      */
     @Override
     public boolean contains(T element) {
-        if (element == null) {
-            for (int i = 0; i < size; i++) {
-                if (array[i] == null) {
-                    return true;
-                }
-            }
-        } else {
-            for (int i = 0; i < size; i++) {
-                if (element.equals(array[i])) {
-                    return true;
-                }
-            }
+        for (int i = 0; i < size; i++) {
+            return element == null ? array[i] == null : array[i].equals(element);
         }
         return false;
     }
