@@ -23,13 +23,15 @@ public class SingleLinkedListTest {
 
     @Test
     public void testAdd1() {
-        singlyLinkedList.add(1, 1);
-        singlyLinkedList.add(1, null);
+        singlyLinkedList.add(0, 1000);
+        singlyLinkedList.add(5, null);
+        singlyLinkedList.add(12, null);
+        singlyLinkedList.add(14, null);
     }
 
     @Test
     public void testRemove() {
-        singlyLinkedList.remove(1);
+        singlyLinkedList.remove(9);
     }
 
     @Test
@@ -46,6 +48,7 @@ public class SingleLinkedListTest {
     @Test
     public void testClear() {
         singlyLinkedList.clear();
+        System.out.println();
     }
 
     @Test

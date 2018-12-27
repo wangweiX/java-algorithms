@@ -44,7 +44,7 @@ public class DoublyLinkedList<T> implements IList<T> {
      */
     @Override
     public boolean add(int index, T element) {
-        checkElementIndex(index);
+        checkPositionIndex(index);
         if (index == size) {
             return add(element);
         } else {
@@ -79,13 +79,13 @@ public class DoublyLinkedList<T> implements IList<T> {
      * @return
      */
     private boolean addBefore(T element, Node<T> target) {
-        Node<T> pred = target.prev;
-        Node<T> newElement = new Node<>(pred, element, target);
+        Node<T> prev = target.prev;
+        Node<T> newElement = new Node<>(prev, element, target);
         target.prev = newElement;
-        if (pred == null) {
+        if (prev == null) {
             head = newElement;
         } else {
-            pred.next = newElement;
+            prev.next = newElement;
         }
         size++;
         return true;
@@ -125,7 +125,7 @@ public class DoublyLinkedList<T> implements IList<T> {
      */
     @Override
     public T remove(int index) {
-        checkElementIndex(index);
+        checkPositionIndex(index);
         return unlink(node(index));
     }
 
@@ -183,8 +183,8 @@ public class DoublyLinkedList<T> implements IList<T> {
         return element;
     }
 
-    private void checkElementIndex(int index) {
-        if (index < 0 || index >= size) {
+    private void checkPositionIndex(int index) {
+        if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
         }
     }
@@ -198,7 +198,7 @@ public class DoublyLinkedList<T> implements IList<T> {
      */
     @Override
     public T set(int index, T element) {
-        checkElementIndex(index);
+        checkPositionIndex(index);
         Node<T> oldNode = node(index);
         T oldElement = oldNode.element;
         oldNode.element = element;

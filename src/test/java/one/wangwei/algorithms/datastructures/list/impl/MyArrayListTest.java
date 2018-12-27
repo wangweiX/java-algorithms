@@ -24,13 +24,15 @@ public class MyArrayListTest {
 
     @Test
     public void testAdd1() {
-        myArrayList.add(1, 1);
+        myArrayList.add(10, 1);
         myArrayList.add(1, null);
     }
 
     @Test
     public void testRemove() {
-        myArrayList.remove(1);
+        for (int i = 0; i < 10; i++) {
+            myArrayList.remove(i);
+        }
     }
 
     @Test
@@ -58,5 +60,16 @@ public class MyArrayListTest {
     @Test
     public void testSize() {
         System.out.println(myArrayList.size());
+    }
+
+    public static void main(String[] args) {
+//        int[] array = new int[10];
+//
+//        int growSize = array.length + (array.length >> 1);
+//        array = Arrays.copyOf(array, growSize);
+//
+//        System.out.println(array);
+
+        System.out.println(4 >> 1 >> 1);
     }
 }

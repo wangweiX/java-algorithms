@@ -1,16 +1,16 @@
 package one.wangwei.algorithms.datastructures.list;
 
 /**
- * 线性表接口
+ * List Interface
  *
  * @param <T>
- * @author wangwei
+ * @author https://wangwei.one/
  * @date 2018/04/27
  */
 public interface IList<T> {
 
     /**
-     * 添加元素
+     * add element
      *
      * @param element
      * @return
@@ -18,7 +18,7 @@ public interface IList<T> {
     public boolean add(T element);
 
     /**
-     * 在index处添加元素
+     * add element at index
      *
      * @param index
      * @param element
@@ -27,7 +27,7 @@ public interface IList<T> {
     public boolean add(int index, T element);
 
     /**
-     * 移除元素
+     * remove element
      *
      * @param element
      * @return
@@ -35,7 +35,7 @@ public interface IList<T> {
     public boolean remove(T element);
 
     /**
-     * 删除 index 位置上的元素
+     * remove element by index
      *
      * @param index
      * @return
@@ -43,28 +43,29 @@ public interface IList<T> {
     public T remove(int index);
 
     /**
-     * 设置index上的元素
+     * set element by index
      *
      * @param index
      * @param element
-     * @return
+     * @return old element
      */
     public T set(int index, T element);
 
     /**
-     * 清空list集合
+     * clear list
      */
     public void clear();
 
     /**
-     * 判断是否包含某个元素
+     * contain certain element
      *
      * @param element
+     * @return
      */
     public boolean contains(T element);
 
     /**
-     * 集合大小
+     * get list size
      *
      * @return
      */

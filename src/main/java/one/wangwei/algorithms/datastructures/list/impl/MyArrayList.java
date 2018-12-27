@@ -5,7 +5,7 @@ import one.wangwei.algorithms.datastructures.list.IList;
 import java.util.Arrays;
 
 /**
- * 顺序表
+ * Array List
  *
  * @param <T>
  * @author https://wangwei.one
@@ -29,7 +29,7 @@ public class MyArrayList<T> implements IList<T> {
     private T[] array = (T[]) new Object[DEFAULT_SIZE];
 
     /**
-     * 添加元素
+     * add element
      *
      * @param element
      * @return
@@ -40,7 +40,7 @@ public class MyArrayList<T> implements IList<T> {
     }
 
     /**
-     * 在index处添加元素
+     * add element at index
      *
      * @param index
      * @param element
@@ -51,11 +51,11 @@ public class MyArrayList<T> implements IList<T> {
         if (index < 0 || index > size) {
             throw new ArrayIndexOutOfBoundsException("Index: " + index + ", Size: " + size);
         }
-        // 先进行扩容判断
+        // need grow
         if (size >= array.length) {
             grow();
         }
-        // 插入操作，复制array
+        // copy array element
         if (index < size) {
             System.arraycopy(array, index, array, index + 1, size - index);
         }
@@ -73,7 +73,7 @@ public class MyArrayList<T> implements IList<T> {
     }
 
     /**
-     * 移除元素
+     * remove element
      *
      * @param element
      * @return
@@ -97,26 +97,23 @@ public class MyArrayList<T> implements IList<T> {
     }
 
     /**
-     * 删除 index 位置上的元素
+     * remove element by index
      *
      * @param index
      * @return
      */
     @Override
     public T remove(int index) {
-        if (index < 0 || index >= size) {
-            throw new ArrayIndexOutOfBoundsException("Index: " + index + ", Size: " + size);
-        }
+        checkPositionIndex(index);
         T oldElement = array[index];
-        // 判断是否需要进行数组复制
+        // need copy element
         if (index != (size - 1)) {
             System.arraycopy(array, index + 1, array, index, size - index - 1);
         }
-        // size减1
         --size;
         array[size] = null;
         // shrink 25%
-        int shrinkSize = size - (size >> 1 >> 1);
+        int shrinkSize = size - (size >> 2);
         if (shrinkSize >= DEFAULT_SIZE && shrinkSize > size) {
             shrink();
         }
@@ -124,15 +121,15 @@ public class MyArrayList<T> implements IList<T> {
     }
 
     /**
-     * 压缩25%
+     * shrink 25%
      */
     private void shrink() {
-        int shrinkSize = size - (size >> 1 >> 1);
+        int shrinkSize = size - (size >> 2);
         array = Arrays.copyOf(array, shrinkSize);
     }
 
     /**
-     * 设置index上的元素
+     * set element by index
      *
      * @param index
      * @param element
@@ -140,16 +137,25 @@ public class MyArrayList<T> implements IList<T> {
      */
     @Override
     public T set(int index, T element) {
-        if (index < 0 || index >= size) {
-            throw new ArrayIndexOutOfBoundsException("Index: " + index + ", Size: " + size);
-        }
+        checkPositionIndex(index);
         T oldElement = array[index];
         array[index] = element;
         return oldElement;
     }
 
     /**
-     * 清空list集合
+     * check index
+     *
+     * @param index
+     */
+    private void checkPositionIndex(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+        }
+    }
+
+    /**
+     * clear list
      */
     @Override
     public void clear() {
@@ -160,20 +166,28 @@ public class MyArrayList<T> implements IList<T> {
     }
 
     /**
-     * 判断是否包含某个元素
+     * contain certain element
      *
      * @param element
      */
     @Override
     public boolean contains(T element) {
         for (int i = 0; i < size; i++) {
-            return element == null ? array[i] == null : array[i].equals(element);
+            if (element == null) {
+                if (array[i] == null) {
+                    return true;
+                }
+            } else {
+                if (array[i].equals(element)) {
+                    return true;
+                }
+            }
         }
         return false;
     }
 
     /**
-     * 集合大小
+     * get list size
      *
      * @return
      */

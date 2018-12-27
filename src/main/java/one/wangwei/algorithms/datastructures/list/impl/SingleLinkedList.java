@@ -3,32 +3,28 @@ package one.wangwei.algorithms.datastructures.list.impl;
 import one.wangwei.algorithms.datastructures.list.IList;
 
 /**
- * 单向链表
+ * Single Linked List
  *
- * @param <T>
  * @author https://wangwei.one
- * @date 2018/05/03
+ * @date 2018/12/25
  */
 public class SingleLinkedList<T> implements IList<T> {
 
     /**
-     * 集合大小
+     * size
      */
     private int size = 0;
     /**
-     * 头部元素
+     * head node
      */
-    private Node<T> head = null;
+    private Node<T> head;
     /**
-     * 尾部元素
+     * tail node
      */
-    private Node<T> tail = null;
-
-    public SingleLinkedList() {
-    }
+    private Node<T> tail;
 
     /**
-     * 添加元素
+     * add element
      *
      * @param element
      * @return
@@ -39,7 +35,7 @@ public class SingleLinkedList<T> implements IList<T> {
     }
 
     /**
-     * 添加元素
+     * add element at index
      *
      * @param index
      * @param element
@@ -47,7 +43,9 @@ public class SingleLinkedList<T> implements IList<T> {
      */
     @Override
     public boolean add(int index, T element) {
-        checkPositionIndex(index);
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+        }
         if (index == size) {
             return add(element);
         } else {
@@ -56,73 +54,104 @@ public class SingleLinkedList<T> implements IList<T> {
     }
 
     /**
-     * 末端元素添加
+     * Add Last element
      *
      * @param element
      * @return
      */
     private boolean addLast(T element) {
-        final Node<T> last = tail;
-        Node<T> newElement = new Node<>(element, null);
-        tail = newElement;
+        Node<T> last = tail;
+        tail = new Node<>(null, element);
+        // if linked list is empty
         if (last == null) {
-            head = newElement;
+            head = tail;
         } else {
-            last.next = newElement;
+            last.next = tail;
         }
         size++;
         return true;
     }
 
     /**
-     * 插入元素
+     * add element before certain element
      *
-     * @param element
+     * @param index
      * @param element
      * @return
      */
     private boolean addBefore(int index, T element) {
         checkPositionIndex(index);
-        int prevIndex = index - 1;
-        Node<T> prev = prevIndex < 0 ? null : node(prevIndex);
-
-        Node<T> target = node(index);
-        Node<T> newElement = new Node<>(element, target);
+        // prev node
+        Node<T> prev = null;
+        Node<T> x = head;
+        for (int i = 0; i < index; i++) {
+            prev = x;
+            x = x.next;
+        }
+        // current node
+        Node<T> current = x;
+        // new node
+        Node<T> newNode = new Node<>(current, element);
+        // if current node is head
         if (prev == null) {
-            head = newElement;
+            head = newNode;
         } else {
-            prev.next = newElement;
+            prev.next = newNode;
         }
         size++;
         return true;
     }
 
     /**
-     * 移除元素
+     * remove element
      *
      * @param element
      * @return
      */
     @Override
     public boolean remove(T element) {
+        Node<T> prev = null;
+        Node<T> x = head;
         if (element == null) {
-            for (Node<T> x = head; x != null; x = x.next) {
-                if (x.element == null) {
-                    return unlink(x);
-                }
+            while (x != null && x.element != null) {
+                prev = x;
+                x = x.next;
             }
         } else {
-            for (Node<T> x = head; x != null; x = x.next) {
-                if (element.equals(x.element)) {
-                    return unlink(x);
-                }
+            while (x != null && !x.element.equals(element)) {
+                prev = x;
+                x = x.next;
             }
         }
+
+        // if this linked is null OR don't find element
+        if (x == null) {
+            return false;
+        }
+
+        Node<T> next = x.next;
+
+        // if delete node is head
+        if (prev == null) {
+            head = next;
+        } else {
+            prev.next = next;
+        }
+        // if delete node is tail
+        if (next == null) {
+            tail = prev;
+        }
+
+        // for GC
+        x.element = null;
+        x = null;
+
+        size--;
         return false;
     }
 
     /**
-     * 删除 index 位置上的元素
+     * remove element by index
      *
      * @param index
      * @return
@@ -130,36 +159,53 @@ public class SingleLinkedList<T> implements IList<T> {
     @Override
     public T remove(int index) {
         checkPositionIndex(index);
+        Node<T> prev = null;
+        Node<T> x = head;
+        for (int i = 0; i < index; i++) {
+            prev = x;
+            x = x.next;
+        }
 
-        int prevIndex = index - 1;
-        Node<T> prev = prevIndex < 0 ? null : node(prevIndex);
-        Node<T> node = node(index);
-        Node<T> next = node.next;
+        // if linked is empty
+        if (x == null) {
+            return null;
+        }
 
+        Node<T> next = x.next;
+
+        // if delete node is head
         if (prev == null) {
             head = next;
         } else {
             prev.next = next;
         }
 
-        // 删除tail元素
+        // if delete node is tail
         if (next == null) {
             tail = prev;
-        } else {
-            node.next = null;
         }
-
-        T element = node.element;
-
-        node.element = null;
-        node = null;
-
         size--;
-        return element;
+        return x.element;
     }
 
     /**
-     * 返回 index 位置上的元素
+     * set element by index
+     *
+     * @param index
+     * @param element
+     * @return old element
+     */
+    @Override
+    public T set(int index, T element) {
+        checkPositionIndex(index);
+        Node<T> node = node(index);
+        T oldElement = node.element;
+        node.element = element;
+        return oldElement;
+    }
+
+    /**
+     * get element by index
      *
      * @param index
      * @return
@@ -174,76 +220,18 @@ public class SingleLinkedList<T> implements IList<T> {
     }
 
     /**
-     * 卸载元素
+     * check index
      *
-     * @param node
+     * @param index
      */
-    private boolean unlink(Node<T> node) {
-        // 找到前驱元素
-        Node<T> prev = null;
-        Node<T> x = head;
-
-        if (node.element == null) {
-            while (x != null && x.element != null) {
-                prev = x;
-                x = x.next;
-            }
-        } else {
-            while (x != null && !x.element.equals(node.element)) {
-                prev = x;
-                x = x.next;
-            }
-        }
-
-        if (x == null) {
-            return false;
-        }
-
-        final Node<T> next = node.next;
-
-        // 删除head元素
-        if (prev == null) {
-            head = next;
-        } else {
-            prev.next = next;
-        }
-
-        // 删除tail元素
-        if (next == null) {
-            tail = prev;
-        } else {
-            node.next = null;
-        }
-
-        node.element = null;
-        size--;
-        return true;
-    }
-
     private void checkPositionIndex(int index) {
-        if (index < 0 || index > size) {
+        if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
         }
     }
 
     /**
-     * 设置index上的元素
-     *
-     * @param index
-     * @param element
-     * @return
-     */
-    @Override
-    public T set(int index, T element) {
-        checkPositionIndex(index);
-        Node<T> oldNode = node(index);
-        T oldElement = oldNode.element;
-        oldNode.element = element;
-        return oldElement;
-    }
-
-    /**
-     * 清空list集合
+     * clear list
      */
     @Override
     public void clear() {
@@ -258,7 +246,7 @@ public class SingleLinkedList<T> implements IList<T> {
     }
 
     /**
-     * 判断是否包含某个元素
+     * contain certain element
      *
      * @param element
      */
@@ -272,7 +260,7 @@ public class SingleLinkedList<T> implements IList<T> {
             }
         } else {
             for (Node<T> x = head; x != null; x = x.next) {
-                if (element.equals(x.element)) {
+                if (x.element.equals(element)) {
                     return true;
                 }
             }
@@ -281,7 +269,7 @@ public class SingleLinkedList<T> implements IList<T> {
     }
 
     /**
-     * 集合大小
+     * get list size
      *
      * @return
      */
@@ -291,19 +279,17 @@ public class SingleLinkedList<T> implements IList<T> {
     }
 
     /**
-     * 节点
+     * Linked List Node
      *
      * @param <T>
      */
     private class Node<T> {
-
-        private T element;
         private Node<T> next;
+        private T element;
 
-        public Node(T element, Node<T> next) {
-            this.element = element;
+        public Node(Node<T> next, T element) {
             this.next = next;
+            this.element = element;
         }
     }
-
 }
