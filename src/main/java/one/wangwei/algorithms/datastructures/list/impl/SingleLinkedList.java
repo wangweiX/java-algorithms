@@ -125,7 +125,7 @@ public class SingleLinkedList<T> implements IList<T> {
             }
         }
 
-        // if this linked is null OR don't find element
+        // if this linked is empty OR don't find element
         if (x == null) {
             return false;
         }
@@ -148,7 +148,7 @@ public class SingleLinkedList<T> implements IList<T> {
         x = null;
 
         size--;
-        return false;
+        return true;
     }
 
     /**
@@ -213,8 +213,7 @@ public class SingleLinkedList<T> implements IList<T> {
      */
     @Override
     public T get(int index) {
-        Node<T> node = node(index);
-        return node == null ? null : node.element;
+        return node(index).element;
     }
 
     /**

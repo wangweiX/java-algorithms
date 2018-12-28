@@ -3,7 +3,7 @@ package one.wangwei.algorithms.datastructures.list.impl;
 import one.wangwei.algorithms.datastructures.list.IList;
 
 /**
- * 双向循环链表
+ * Doubly circular linked list
  *
  * @author https://wangwei.one
  * @date 2018/12/21
@@ -11,7 +11,7 @@ import one.wangwei.algorithms.datastructures.list.IList;
 public class DoublyCircularLinkedList<T> implements IList<T> {
 
     /**
-     * 添加元素
+     * add element
      *
      * @param element
      * @return
@@ -22,7 +22,7 @@ public class DoublyCircularLinkedList<T> implements IList<T> {
     }
 
     /**
-     * 在index处添加元素
+     * add element at index
      *
      * @param index
      * @param element
@@ -34,7 +34,7 @@ public class DoublyCircularLinkedList<T> implements IList<T> {
     }
 
     /**
-     * 移除元素
+     * remove element
      *
      * @param element
      * @return
@@ -45,7 +45,7 @@ public class DoublyCircularLinkedList<T> implements IList<T> {
     }
 
     /**
-     * 删除 index 位置上的元素
+     * remove element by index
      *
      * @param index
      * @return
@@ -56,11 +56,11 @@ public class DoublyCircularLinkedList<T> implements IList<T> {
     }
 
     /**
-     * 设置index上的元素
+     * set element by index
      *
      * @param index
      * @param element
-     * @return
+     * @return old element
      */
     @Override
     public T set(int index, T element) {
@@ -68,7 +68,18 @@ public class DoublyCircularLinkedList<T> implements IList<T> {
     }
 
     /**
-     * 清空list集合
+     * get element by index
+     *
+     * @param index
+     * @return
+     */
+    @Override
+    public T get(int index) {
+        return null;
+    }
+
+    /**
+     * clear list
      */
     @Override
     public void clear() {
@@ -76,9 +87,10 @@ public class DoublyCircularLinkedList<T> implements IList<T> {
     }
 
     /**
-     * 判断是否包含某个元素
+     * contain certain element
      *
      * @param element
+     * @return
      */
     @Override
     public boolean contains(T element) {
@@ -86,7 +98,7 @@ public class DoublyCircularLinkedList<T> implements IList<T> {
     }
 
     /**
-     * 集合大小
+     * get list size
      *
      * @return
      */

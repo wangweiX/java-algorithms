@@ -10,7 +10,7 @@ public class SinglyCircularLinkedListTest {
     @BeforeMethod
     public void setUp() {
         cyclicLinkedList = new SinglyCircularLinkedList<>();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 3; i++) {
             cyclicLinkedList.add(i);
         }
     }
@@ -19,7 +19,6 @@ public class SinglyCircularLinkedListTest {
     public void testAdd() {
         cyclicLinkedList.add(1);
         cyclicLinkedList.add(null);
-
     }
 
     @Test
@@ -30,16 +29,15 @@ public class SinglyCircularLinkedListTest {
 
     @Test
     public void testRemove() {
-        cyclicLinkedList.remove(1);
+        cyclicLinkedList.remove(0);
+        System.out.println(cyclicLinkedList);
     }
 
     @Test
     public void testRemove1() {
-        cyclicLinkedList.add(null);
-        cyclicLinkedList.remove(Integer.valueOf(999));
-        cyclicLinkedList.remove(null);
-        cyclicLinkedList.remove(Integer.valueOf(4));
-
+        cyclicLinkedList.remove(Integer.valueOf(1));
+//        cyclicLinkedList.remove(null);
+//        cyclicLinkedList.remove(Integer.valueOf(4));
         System.out.println(cyclicLinkedList);
     }
 
@@ -62,5 +60,10 @@ public class SinglyCircularLinkedListTest {
     @Test
     public void testSize() {
         System.out.println(cyclicLinkedList.size());
+    }
+
+    @Test
+    public void testClean() {
+        cyclicLinkedList.clear();
     }
 }

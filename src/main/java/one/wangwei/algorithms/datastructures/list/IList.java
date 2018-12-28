@@ -27,7 +27,7 @@ public interface IList<T> {
     public boolean add(int index, T element);
 
     /**
-     * remove element
+     * remove element by element
      *
      * @param element
      * @return

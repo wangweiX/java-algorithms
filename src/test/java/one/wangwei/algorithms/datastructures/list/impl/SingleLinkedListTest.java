@@ -10,7 +10,7 @@ public class SingleLinkedListTest {
     @BeforeMethod
     public void setUp() {
         singlyLinkedList = new SingleLinkedList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 1; i++) {
             singlyLinkedList.add(i);
         }
     }
@@ -31,7 +31,8 @@ public class SingleLinkedListTest {
 
     @Test
     public void testRemove() {
-        singlyLinkedList.remove(9);
+        singlyLinkedList.remove(0);
+        System.out.println(singlyLinkedList);
     }
 
     @Test

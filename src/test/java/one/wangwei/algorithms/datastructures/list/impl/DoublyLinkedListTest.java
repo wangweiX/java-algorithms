@@ -10,9 +10,9 @@ public class DoublyLinkedListTest {
     @BeforeMethod
     public void setUp() {
         myLinkedList = new DoublyLinkedList<>();
-        for (int i = 0; i < 100; i++) {
-            myLinkedList.add(i);
-        }
+//        for (int i = 0; i < 100; i++) {
+//            myLinkedList.add(i);
+//        }
     }
 
     @Test
@@ -29,7 +29,7 @@ public class DoublyLinkedListTest {
 
     @Test
     public void testRemove() {
-        myLinkedList.remove(1);
+        myLinkedList.remove(0);
     }
 
     @Test
