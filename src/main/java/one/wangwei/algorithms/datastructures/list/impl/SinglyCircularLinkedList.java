@@ -167,7 +167,7 @@ public class SinglyCircularLinkedList<T> implements IList<T> {
     }
 
     /**
-     * 删除 index 位置上的元素
+     * remove element by index
      *
      * @param index
      * @return
@@ -211,7 +211,7 @@ public class SinglyCircularLinkedList<T> implements IList<T> {
     }
 
     /**
-     * 返回 index 位置上的元素
+     * get element by index
      *
      * @param index
      * @return
@@ -232,7 +232,7 @@ public class SinglyCircularLinkedList<T> implements IList<T> {
     }
 
     /**
-     * 设置index上的元素
+     * set element by index
      *
      * @param index
      * @param element
@@ -259,7 +259,7 @@ public class SinglyCircularLinkedList<T> implements IList<T> {
     }
 
     /**
-     * 清空list集合
+     * clear list element
      */
     @Override
     public void clear() {
@@ -274,7 +274,7 @@ public class SinglyCircularLinkedList<T> implements IList<T> {
     }
 
     /**
-     * 判断是否包含某个元素
+     * contain certain element
      *
      * @param element
      */
@@ -297,7 +297,7 @@ public class SinglyCircularLinkedList<T> implements IList<T> {
     }
 
     /**
-     * 集合大小
+     * get list size
      *
      * @return
      */
