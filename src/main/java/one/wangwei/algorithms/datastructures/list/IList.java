@@ -52,6 +52,14 @@ public interface IList<T> {
     public T set(int index, T element);
 
     /**
+     * get element by index
+     *
+     * @param index
+     * @return
+     */
+    public T get(int index);
+
+    /**
      * clear list
      */
     public void clear();

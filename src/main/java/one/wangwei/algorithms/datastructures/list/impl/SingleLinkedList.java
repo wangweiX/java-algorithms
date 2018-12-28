@@ -61,12 +61,13 @@ public class SingleLinkedList<T> implements IList<T> {
      */
     private boolean addLast(T element) {
         Node<T> last = tail;
-        tail = new Node<>(null, element);
+        Node<T> newNode = new Node<>(null, element);
+        tail = newNode;
         // if linked list is empty
         if (last == null) {
-            head = tail;
+            head = newNode;
         } else {
-            last.next = tail;
+            last.next = newNode;
         }
         size++;
         return true;
@@ -202,6 +203,18 @@ public class SingleLinkedList<T> implements IList<T> {
         T oldElement = node.element;
         node.element = element;
         return oldElement;
+    }
+
+    /**
+     * get element by index
+     *
+     * @param index
+     * @return
+     */
+    @Override
+    public T get(int index) {
+        Node<T> node = node(index);
+        return node == null ? null : node.element;
     }
 
     /**

@@ -3,7 +3,7 @@ package one.wangwei.algorithms.datastructures.list.impl;
 import one.wangwei.algorithms.datastructures.list.IList;
 
 /**
- * 双向链表结构
+ * Doubly Linked List
  *
  * @param <T>
  * @author https://wangwei.one
@@ -12,20 +12,20 @@ import one.wangwei.algorithms.datastructures.list.IList;
 public class DoublyLinkedList<T> implements IList<T> {
 
     /**
-     * 集合大小
+     * size
      */
     private int size = 0;
     /**
-     * 头部元素
+     * head element
      */
     private Node<T> head = null;
     /**
-     * 尾部元素
+     * tail element
      */
     private Node<T> tail = null;
 
     /**
-     * 添加元素
+     * add element
      *
      * @param element
      * @return
@@ -36,7 +36,7 @@ public class DoublyLinkedList<T> implements IList<T> {
     }
 
     /**
-     * 添加元素
+     * add element at index
      *
      * @param index
      * @param element
@@ -44,7 +44,9 @@ public class DoublyLinkedList<T> implements IList<T> {
      */
     @Override
     public boolean add(int index, T element) {
-        checkPositionIndex(index);
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+        }
         if (index == size) {
             return add(element);
         } else {
@@ -53,26 +55,26 @@ public class DoublyLinkedList<T> implements IList<T> {
     }
 
     /**
-     * 末端元素添加
+     * Add Last element
      *
      * @param element
      * @return
      */
     private boolean addLast(T element) {
         final Node<T> last = tail;
-        Node<T> newElement = new Node<>(last, element, null);
-        tail = newElement;
+        Node<T> newNode = new Node<>(last, element, null);
+        tail = newNode;
         if (last == null) {
-            head = newElement;
+            head = newNode;
         } else {
-            last.next = newElement;
+            last.next = newNode;
         }
         size++;
         return true;
     }
 
     /**
-     * 插入元素
+     * add element before certain element
      *
      * @param element
      * @param target
@@ -80,19 +82,19 @@ public class DoublyLinkedList<T> implements IList<T> {
      */
     private boolean addBefore(T element, Node<T> target) {
         Node<T> prev = target.prev;
-        Node<T> newElement = new Node<>(prev, element, target);
-        target.prev = newElement;
+        Node<T> newNode = new Node<>(prev, element, target);
+        target.prev = newNode;
         if (prev == null) {
-            head = newElement;
+            head = newNode;
         } else {
-            prev.next = newElement;
+            prev.next = newNode;
         }
         size++;
         return true;
     }
 
     /**
-     * 移除元素
+     * remove node by element
      *
      * @param element
      * @return
@@ -118,25 +120,24 @@ public class DoublyLinkedList<T> implements IList<T> {
     }
 
     /**
-     * 删除 index 位置上的元素
+     * remove node by index
      *
      * @param index
      * @return
      */
     @Override
     public T remove(int index) {
-        checkPositionIndex(index);
         return unlink(node(index));
     }
 
     /**
-     * 返回 index 位置上的元素
+     * get element by index
      *
      * @param index
      * @return
      */
     private Node<T> node(int index) {
-        // 二分查找
+        checkPositionIndex(index);
         if (index < (size >> 1)) {
             Node<T> x = head;
             for (int i = 0; i < index; i++) {
@@ -153,7 +154,7 @@ public class DoublyLinkedList<T> implements IList<T> {
     }
 
     /**
-     * 卸载元素
+     * unlink node
      *
      * @param node
      */
@@ -162,15 +163,16 @@ public class DoublyLinkedList<T> implements IList<T> {
         final Node<T> prev = node.prev;
         final Node<T> next = node.next;
 
-        // 删除head元素
+        // if unlink is head
         if (prev == null) {
             head = next;
         } else {
             prev.next = next;
+            // clear prev
             node.prev = null;
         }
 
-        // 删除tail元素
+        // if unlink is tail
         if (next == null) {
             tail = prev;
         } else {
@@ -184,13 +186,13 @@ public class DoublyLinkedList<T> implements IList<T> {
     }
 
     private void checkPositionIndex(int index) {
-        if (index < 0 || index > size) {
+        if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
         }
     }
 
     /**
-     * 设置index上的元素
+     * set element by index
      *
      * @param index
      * @param element
@@ -206,7 +208,19 @@ public class DoublyLinkedList<T> implements IList<T> {
     }
 
     /**
-     * 清空list集合
+     * get element by index
+     *
+     * @param index
+     * @return
+     */
+    @Override
+    public T get(int index) {
+        Node<T> node = node(index);
+        return node == null ? null : node.element;
+    }
+
+    /**
+     * clear list
      */
     @Override
     public void clear() {
@@ -222,7 +236,7 @@ public class DoublyLinkedList<T> implements IList<T> {
     }
 
     /**
-     * 判断是否包含某个元素
+     * contain certain element
      *
      * @param element
      */
@@ -245,7 +259,7 @@ public class DoublyLinkedList<T> implements IList<T> {
     }
 
     /**
-     * 集合大小
+     * get list size
      *
      * @return
      */
@@ -255,7 +269,7 @@ public class DoublyLinkedList<T> implements IList<T> {
     }
 
     /**
-     * 节点
+     * node
      *
      * @param <T>
      */

@@ -144,6 +144,18 @@ public class MyArrayList<T> implements IList<T> {
     }
 
     /**
+     * get element by index
+     *
+     * @param index
+     * @return
+     */
+    @Override
+    public T get(int index) {
+        checkPositionIndex(index);
+        return array[index];
+    }
+
+    /**
      * check index
      *
      * @param index
