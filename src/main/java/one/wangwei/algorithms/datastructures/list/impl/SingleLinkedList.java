@@ -291,6 +291,58 @@ public class SingleLinkedList<T> implements IList<T> {
     }
 
     /**
+     * 反转链表
+     */
+    public void reverse() {
+        reverseIteratively();
+//        reverseRecursively(head, null);
+    }
+
+    /**
+     * 遍历
+     */
+    public void reverseIteratively() {
+        tail = head;
+
+        Node<T> prev = null;
+        Node<T> curr = head;
+        Node<T> next;
+
+        while (curr != null) {
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+
+        head = prev;
+    }
+
+    /**
+     * 递归
+     */
+    public void reverseRecursively(Node<T> curr, Node<T> prev) {
+        if (curr == null) {
+            return;
+        }
+        if (curr.next == null) {
+            head = curr;
+            curr.next = prev;
+            return;
+        }
+
+        if (prev == null) {
+            tail = curr;
+        }
+
+        Node<T> next1 = curr.next;
+
+        curr.next = prev;
+
+        reverseRecursively(next1, curr);
+    }
+
+    /**
      * Linked List Node
      *
      * @param <T>

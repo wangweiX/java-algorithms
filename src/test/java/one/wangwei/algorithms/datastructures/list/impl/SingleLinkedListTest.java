@@ -10,7 +10,7 @@ public class SingleLinkedListTest {
     @BeforeMethod
     public void setUp() {
         singlyLinkedList = new SingleLinkedList<>();
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 5; i++) {
             singlyLinkedList.add(i);
         }
     }
@@ -61,5 +61,11 @@ public class SingleLinkedListTest {
     @Test
     public void testSize() {
         System.out.println(singlyLinkedList.size());
+    }
+
+    @Test
+    public void testReverse() {
+        singlyLinkedList.reverse();
+        System.out.println(singlyLinkedList);
     }
 }
