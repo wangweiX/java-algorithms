@@ -330,13 +330,11 @@ public class SingleLinkedList<T> implements IList<T> {
             curr.next = prev;
             return;
         }
-
         if (prev == null) {
             tail = curr;
         }
 
         Node<T> next1 = curr.next;
-
         curr.next = prev;
 
         reverseRecursively(next1, curr);
