@@ -1,16 +1,15 @@
 package one.wangwei.algorithms.datastructures.stack;
 
-
 /**
- * 栈
+ * Stack
  *
  * @author https://wangwei.one
- * @date 2018/05/04
+ * @date 2019/01/09
  */
 public interface IStack<T> {
 
     /**
-     * 入栈
+     * Push into Stack
      *
      * @param value
      * @return
@@ -18,21 +17,21 @@ public interface IStack<T> {
     public boolean push(T value);
 
     /**
-     * 出栈
+     * Pop from Stack
      *
      * @return
      */
     public T pop();
 
     /**
-     * 查看栈顶值
+     * Peek Top Element
      *
      * @return
      */
     public T peek();
 
     /**
-     * 删除元素
+     * remove element
      *
      * @param value
      * @return
@@ -40,12 +39,12 @@ public interface IStack<T> {
     public boolean remove(T value);
 
     /**
-     * 清空栈
+     * clear stack
      */
     public void clear();
 
     /**
-     * 是否包含元素
+     * Contain certain element
      *
      * @param value
      * @return
@@ -53,7 +52,7 @@ public interface IStack<T> {
     public boolean contains(T value);
 
     /**
-     * 栈大小
+     * Get Stack size
      *
      * @return
      */

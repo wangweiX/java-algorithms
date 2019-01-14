@@ -3,11 +3,11 @@ package one.wangwei.algorithms.datastructures.stack.impl;
 import one.wangwei.algorithms.datastructures.stack.IStack;
 
 /**
- * 链表栈
+ * Linked Stack
  *
  * @param <T>
  * @author https://wangwei.one
- * @date 2018/05/04
+ * @date 2019/01/10
  */
 public class LinkedStack<T> implements IStack<T> {
 
@@ -20,7 +20,7 @@ public class LinkedStack<T> implements IStack<T> {
     }
 
     /**
-     * 入栈
+     * Push into Stack
      *
      * @param value
      * @return
@@ -41,7 +41,7 @@ public class LinkedStack<T> implements IStack<T> {
     }
 
     /**
-     * 出栈
+     * Pop from Stack
      *
      * @return
      */
@@ -66,7 +66,7 @@ public class LinkedStack<T> implements IStack<T> {
     }
 
     /**
-     * 查看栈顶值
+     * Peek Top Element
      *
      * @return
      */
@@ -76,7 +76,7 @@ public class LinkedStack<T> implements IStack<T> {
     }
 
     /**
-     * 删除元素
+     * remove element
      *
      * @param value
      * @return
@@ -135,7 +135,7 @@ public class LinkedStack<T> implements IStack<T> {
     }
 
     /**
-     * 清空栈
+     * clear stack
      */
     @Override
     public void clear() {
@@ -154,7 +154,7 @@ public class LinkedStack<T> implements IStack<T> {
     }
 
     /**
-     * 是否包含元素
+     * Contain certain element
      *
      * @param value
      * @return
@@ -178,7 +178,7 @@ public class LinkedStack<T> implements IStack<T> {
     }
 
     /**
-     * 栈大小
+     * Get Stack size
      *
      * @return
      */
@@ -188,7 +188,7 @@ public class LinkedStack<T> implements IStack<T> {
     }
 
     /**
-     * 节点
+     * Node
      *
      * @param <T>
      */

@@ -9,7 +9,7 @@ import java.util.Arrays;
  *
  * @param <T>
  * @author https://wangwei.one
- * @date 2018/05/04
+ * @date 2019/01/10
  */
 public class ArrayStack<T> implements IStack<T> {
 
@@ -27,7 +27,7 @@ public class ArrayStack<T> implements IStack<T> {
     private int size;
 
     /**
-     * 入栈
+     * Push into Stack
      *
      * @param value
      * @return
@@ -59,7 +59,7 @@ public class ArrayStack<T> implements IStack<T> {
     }
 
     /**
-     * 出栈
+     * Pop from Stack
      *
      * @return
      */
@@ -79,7 +79,7 @@ public class ArrayStack<T> implements IStack<T> {
     }
 
     /**
-     * 查看栈顶值
+     * Peek Top Element
      *
      * @return
      */
@@ -92,7 +92,7 @@ public class ArrayStack<T> implements IStack<T> {
     }
 
     /**
-     * 删除元素
+     * remove element
      *
      * @param value
      * @return
@@ -137,7 +137,7 @@ public class ArrayStack<T> implements IStack<T> {
     }
 
     /**
-     * 清空栈
+     * clear stack
      */
     @Override
     public void clear() {
@@ -152,7 +152,7 @@ public class ArrayStack<T> implements IStack<T> {
     }
 
     /**
-     * 是否包含元素
+     * Contain certain element
      *
      * @param value
      * @return
@@ -175,7 +175,7 @@ public class ArrayStack<T> implements IStack<T> {
     }
 
     /**
-     * 栈大小
+     * Get Stack size
      *
      * @return
      */

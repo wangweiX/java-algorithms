@@ -345,7 +345,7 @@ public class SingleLinkedList<T> implements IList<T> {
      *
      * @param <T>
      */
-    private class Node<T> {
+    public class Node<T> {
         private Node<T> next;
         private T element;
 

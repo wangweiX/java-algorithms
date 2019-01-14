@@ -68,4 +68,5 @@ public class SingleLinkedListTest {
         singlyLinkedList.reverse();
         System.out.println(singlyLinkedList);
     }
+
 }
