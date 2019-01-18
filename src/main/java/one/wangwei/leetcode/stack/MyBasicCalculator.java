@@ -113,7 +113,7 @@ public class MyBasicCalculator {
         if (!operator.empty()) {
             prevOperator = operator.peek();
         }
-        // 第一次入栈
+        // 操作符栈为空的情况下，直接入栈
         if (prevOperator == null) {
             operator.push(operatorSign);
         } else {
