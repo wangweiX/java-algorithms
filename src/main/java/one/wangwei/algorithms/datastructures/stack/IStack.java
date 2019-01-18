@@ -58,4 +58,11 @@ public interface IStack<T> {
      */
     public int size();
 
+    /**
+     * Is empty
+     *
+     * @return
+     */
+    public boolean empty();
+
 }

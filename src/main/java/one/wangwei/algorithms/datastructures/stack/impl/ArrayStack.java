@@ -183,4 +183,14 @@ public class ArrayStack<T> implements IStack<T> {
     public int size() {
         return size;
     }
+
+    /**
+     * Is empty
+     *
+     * @return
+     */
+    @Override
+    public boolean empty() {
+        return size == 0;
+    }
 }

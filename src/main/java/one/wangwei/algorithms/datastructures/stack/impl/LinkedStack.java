@@ -188,6 +188,16 @@ public class LinkedStack<T> implements IStack<T> {
     }
 
     /**
+     * Is empty
+     *
+     * @return
+     */
+    @Override
+    public boolean empty() {
+        return size == 0;
+    }
+
+    /**
      * Node
      *
      * @param <T>
@@ -201,5 +211,6 @@ public class LinkedStack<T> implements IStack<T> {
             this.element = element;
         }
     }
+
 
 }

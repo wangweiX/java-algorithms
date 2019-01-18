@@ -38,7 +38,7 @@ public class BasicCalculator {
 
     public static void main(String[] args) {
         BasicCalculator calculator = new BasicCalculator();
-        calculator.calculate("2-4-(8+2-6+(8+4-(1)+8-10))");
+        System.out.println(calculator.calculate("2-4-(8+2-6 + (8 +4 -(1)+8-10))"));
     }
 
 }
