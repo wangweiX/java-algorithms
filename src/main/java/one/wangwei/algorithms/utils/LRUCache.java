@@ -5,10 +5,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * LRU 缓存淘汰算法
+ * LRU Cache
  *
  * @author https://wangwei.one
- * @date 2018/12/24
+ * @date 2019/01/29
  */
 public class LRUCache<K, V> {
 
@@ -46,7 +46,6 @@ public class LRUCache<K, V> {
      */
     public void put(K key, V value) {
         Node existNode = nodeMap.get(key);
-        // 不存在，则新增
         if (existNode == null) {
             Node newNode = new Node(key, value);
             if (nodeMap.size() >= capacity) {
@@ -54,9 +53,8 @@ public class LRUCache<K, V> {
             }
             addFirst(newNode);
         }
-        // 如果存在，则更新
         else {
-            //更新value值
+            // update the value
             existNode.value = value;
             remove(existNode);
             addFirst(existNode);
