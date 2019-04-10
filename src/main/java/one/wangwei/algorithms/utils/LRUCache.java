@@ -156,50 +156,6 @@ public class LRUCache<K, V> {
         cache.put(5, 5);
         cache.put(1, 30);
         System.out.println(cache.get(11));
-
-        cache.put(9, 12);
-        System.out.println(cache.get(7));
-        System.out.println(cache.get(5));
-        System.out.println(cache.get(8));
-        System.out.println(cache.get(9));
-
-        cache.put(4, 30);
-        cache.put(9, 3);
-        System.out.println(cache.get(9));
-        System.out.println(cache.get(10));
-        System.out.println(cache.get(10));
-
-        cache.put(6, 14);
-        cache.put(3, 1);
-        System.out.println(cache.get(3));
-
-        cache.put(10, 11);
-        System.out.println(cache.get(8));
-
-        cache.put(2, 14);
-        System.out.println(cache.get(1));
-        System.out.println(cache.get(5));
-        System.out.println(cache.get(4));
-
-        cache.put(11, 4);
-        cache.put(12, 24);
-        cache.put(5, 18);
-        System.out.println(cache.get(13));
-
-        cache.put(7, 23);
-        System.out.println(cache.get(8));
-        System.out.println(cache.get(12));
-
-        cache.put(3, 27);
-        cache.put(2, 12);
-        System.out.println(cache.get(5));
-
-        cache.put(2, 9);
-        cache.put(13, 4);
-        cache.put(8, 18);
-        cache.put(1, 7);
-        System.out.println(cache.get(6));
-
     }
 
 }

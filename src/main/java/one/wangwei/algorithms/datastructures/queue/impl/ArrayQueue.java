@@ -7,50 +7,123 @@ import one.wangwei.algorithms.datastructures.queue.IQueue;
  *
  * @param <T>
  * @author https://wangwei.one
- * @date 2018/05/07
+ * @date 2019/03/27
  */
 public class ArrayQueue<T> implements IQueue<T> {
 
     /**
-     * 添加元素到队列头部
+     * default array size
+     */
+    private static final int DEFAULT_SIZE = 1024;
+    /**
+     * 元素数组
+     */
+    private T[] array;
+    /**
+     * 队头指针下标
+     */
+    private int front = 0;
+    /**
+     * 队尾指针下标
+     */
+    private int rear = 0;
+    /**
+     * 队列大小
+     */
+    private int size = 0;
+
+    public ArrayQueue() {
+        this(DEFAULT_SIZE);
+    }
+
+    public ArrayQueue(int capacity) {
+        array = (T[]) new Object[capacity];
+    }
+
+    /**
+     * 添加元素到队列尾部
      *
      * @param value
      * @return
      */
     @Override
     public boolean offer(T value) {
-        return false;
+        if (isFull()) {
+            grow(size);
+        }
+        array[(++rear) % array.length] = value;
+        size++;
+        return true;
     }
 
     /**
-     * 移除队列尾部元素
+     * grow queue size 50%
+     *
+     * @param size
+     */
+    private void grow(int size) {
+        int growSize = (size + (size << 1));
+        T[] tmpArray = (T[]) new Object[growSize];
+        int adjRear = rear % array.length;
+        if (adjRear < front) {
+            System.arraycopy(array, 0, tmpArray, array.length - adjRear, adjRear + 1);
+        }
+        System.arraycopy(array, front, tmpArray, 0, array.length - front);
+        array = tmpArray;
+        rear = (rear - front);
+        front = 0;
+    }
+
+    /**
+     * 移除队列头部元素
      *
      * @return
      */
     @Override
     public T poll() {
-        return null;
+        if (isEmpty()) {
+            return null;
+        }
+        T element = array[front % array.length];
+        array[front % array.length] = null;
+        front++;
+        size--;
+        if (isEmpty()) {
+            // remove last element
+            front = rear = 0;
+        }
+
+        int shrinkSize = array.length >> 1;
+        if (shrinkSize >= DEFAULT_SIZE && size < shrinkSize) {
+            shrink();
+        }
+        return element;
     }
 
     /**
-     * 查看队列尾部元素值
+     * 压缩
+     */
+    private void shrink() {
+        int shrinkSize = array.length >> 1;
+        T[] tmpArray = (T[]) new Object[shrinkSize];
+        int adjRear = rear % array.length;
+        if (adjRear <= front) {
+            System.arraycopy(array, 0, tmpArray, array.length - front, adjRear);
+        }
+
+    }
+
+    /**
+     * 查看队列头部元素值
      *
      * @return
      */
     @Override
     public T peek() {
-        return null;
-    }
-
-    /**
-     * 从队列中移除元素
-     *
-     * @param value
-     * @return
-     */
-    @Override
-    public boolean remove(T value) {
-        return false;
+        if (isEmpty()) {
+            return null;
+        }
+        return array[front % array.length];
     }
 
     /**
@@ -58,7 +131,8 @@ public class ArrayQueue<T> implements IQueue<T> {
      */
     @Override
     public void clear() {
-
+        array = null;
+        front = rear = size = 0;
     }
 
     /**
@@ -66,6 +140,25 @@ public class ArrayQueue<T> implements IQueue<T> {
      */
     @Override
     public int size() {
-        return 0;
+        return size;
     }
+
+    /**
+     * 判断队列是否满
+     *
+     * @return
+     */
+    private boolean isFull() {
+        return front == (rear + 1) % array.length;
+    }
+
+    /**
+     * 判断队是否为空
+     *
+     * @return
+     */
+    private boolean isEmpty() {
+        return front == rear;
+    }
+
 }

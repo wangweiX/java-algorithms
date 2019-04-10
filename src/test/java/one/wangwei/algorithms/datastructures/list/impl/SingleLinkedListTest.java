@@ -10,9 +10,9 @@ public class SingleLinkedListTest {
     @BeforeMethod
     public void setUp() {
         singlyLinkedList = new SingleLinkedList<>();
-        for (int i = 0; i < 5; i++) {
-            singlyLinkedList.add(i);
-        }
+//        for (int i = 0; i < 5; i++) {
+//            singlyLinkedList.add(i);
+//        }
     }
 
     @Test

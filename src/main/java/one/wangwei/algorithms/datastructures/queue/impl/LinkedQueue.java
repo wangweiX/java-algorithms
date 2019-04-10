@@ -7,7 +7,7 @@ import one.wangwei.algorithms.datastructures.queue.IQueue;
  *
  * @param <T>
  * @author https://wangwei.one
- * @date 2018/05/07
+ * @date 2019/03/27
  */
 public class LinkedQueue<T> implements IQueue<T> {
 
@@ -40,17 +40,6 @@ public class LinkedQueue<T> implements IQueue<T> {
     @Override
     public T peek() {
         return null;
-    }
-
-    /**
-     * 从队列中移除元素
-     *
-     * @param value
-     * @return
-     */
-    @Override
-    public boolean remove(T value) {
-        return false;
     }
 
     /**
