@@ -2,6 +2,8 @@ package one.wangwei.algorithms.datastructures.queue.impl;
 
 import one.wangwei.algorithms.datastructures.queue.IQueue;
 
+import java.util.NoSuchElementException;
+
 /**
  * 数组队列
  *
@@ -77,7 +79,7 @@ public class ArrayQueue<T> implements IQueue<T> {
     @Override
     public T poll() {
         if (isEmpty()) {
-            return null;
+            throw new NoSuchElementException("Queue underflow");
         }
 
         T element = array[front % array.length];
@@ -121,7 +123,7 @@ public class ArrayQueue<T> implements IQueue<T> {
     @Override
     public T peek() {
         if (isEmpty()) {
-            return null;
+            throw new NoSuchElementException("Queue underflow");
         }
         return array[front % array.length];
     }

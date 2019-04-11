@@ -2,6 +2,8 @@ package one.wangwei.algorithms.datastructures.queue.impl;
 
 import one.wangwei.algorithms.datastructures.queue.IQueue;
 
+import java.util.NoSuchElementException;
+
 /**
  * 链表队列
  *
@@ -46,7 +48,7 @@ public class LinkedQueue<T> implements IQueue<T> {
     @Override
     public T poll() {
         if (head == null) {
-            return null;
+            throw new NoSuchElementException("Queue underflow");
         }
         Node<T> tmpHead = head;
         head = head.next;
@@ -63,7 +65,7 @@ public class LinkedQueue<T> implements IQueue<T> {
     @Override
     public T peek() {
         if (head == null) {
-            return null;
+            throw new NoSuchElementException("Queue underflow");
         }
         return head.element;
     }
