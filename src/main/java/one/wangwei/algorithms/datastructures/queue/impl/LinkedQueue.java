@@ -54,6 +54,9 @@ public class LinkedQueue<T> implements IQueue<T> {
         head = head.next;
         tmpHead.next = null;
         size--;
+        if (head == null) {
+            tail = null;
+        }
         return tmpHead.element;
     }
 
