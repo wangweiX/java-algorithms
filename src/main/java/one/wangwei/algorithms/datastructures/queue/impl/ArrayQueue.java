@@ -27,10 +27,6 @@ public class ArrayQueue<T> implements IQueue<T> {
      * 队尾指针下标
      */
     private int rear = 0;
-    /**
-     * 队列大小
-     */
-    private int size = 0;
 
     public ArrayQueue() {
         this(DEFAULT_SIZE);
@@ -49,26 +45,25 @@ public class ArrayQueue<T> implements IQueue<T> {
     @Override
     public boolean offer(T value) {
         if (isFull()) {
-            grow(size);
+            grow();
         }
-        array[(++rear) % array.length] = value;
-        size++;
+        array[rear % array.length] = value;
+        rear++;
         return true;
     }
 
     /**
-     * grow queue size 50%
-     *
-     * @param size
+     * grow queue size doubly
      */
-    private void grow(int size) {
-        int growSize = (size + (size << 1));
+    private void grow() {
+        int growSize = array.length << 1;
         T[] tmpArray = (T[]) new Object[growSize];
         int adjRear = rear % array.length;
+        int endIndex = rear > array.length ? array.length : rear;
         if (adjRear < front) {
             System.arraycopy(array, 0, tmpArray, array.length - adjRear, adjRear + 1);
         }
-        System.arraycopy(array, front, tmpArray, 0, array.length - front);
+        System.arraycopy(array, front, tmpArray, 0, endIndex - front);
         array = tmpArray;
         rear = (rear - front);
         front = 0;
@@ -84,17 +79,17 @@ public class ArrayQueue<T> implements IQueue<T> {
         if (isEmpty()) {
             return null;
         }
+
         T element = array[front % array.length];
         array[front % array.length] = null;
         front++;
-        size--;
         if (isEmpty()) {
             // remove last element
             front = rear = 0;
         }
 
         int shrinkSize = array.length >> 1;
-        if (shrinkSize >= DEFAULT_SIZE && size < shrinkSize) {
+        if (shrinkSize >= DEFAULT_SIZE && size() < shrinkSize) {
             shrink();
         }
         return element;
@@ -107,10 +102,15 @@ public class ArrayQueue<T> implements IQueue<T> {
         int shrinkSize = array.length >> 1;
         T[] tmpArray = (T[]) new Object[shrinkSize];
         int adjRear = rear % array.length;
+        int endIndex = rear > array.length ? array.length : rear;
         if (adjRear <= front) {
             System.arraycopy(array, 0, tmpArray, array.length - front, adjRear);
         }
-
+        System.arraycopy(array, front, tmpArray, 0, endIndex - front);
+        array = null;
+        array = tmpArray;
+        rear = rear - front;
+        front = 0;
     }
 
     /**
@@ -132,7 +132,7 @@ public class ArrayQueue<T> implements IQueue<T> {
     @Override
     public void clear() {
         array = null;
-        front = rear = size = 0;
+        front = rear = 0;
     }
 
     /**
@@ -140,7 +140,7 @@ public class ArrayQueue<T> implements IQueue<T> {
      */
     @Override
     public int size() {
-        return size;
+        return rear - front;
     }
 
     /**
@@ -149,7 +149,7 @@ public class ArrayQueue<T> implements IQueue<T> {
      * @return
      */
     private boolean isFull() {
-        return front == (rear + 1) % array.length;
+        return !isEmpty() && (front == (rear + 1) % array.length);
     }
 
     /**
@@ -158,7 +158,7 @@ public class ArrayQueue<T> implements IQueue<T> {
      * @return
      */
     private boolean isEmpty() {
-        return front == rear;
+        return size() <= 0;
     }
 
 }
