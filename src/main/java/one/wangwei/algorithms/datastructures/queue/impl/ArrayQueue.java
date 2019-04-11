@@ -9,7 +9,7 @@ import java.util.NoSuchElementException;
  *
  * @param <T>
  * @author https://wangwei.one
- * @date 2019/03/27
+ * @date 2019/02/04
  */
 public class ArrayQueue<T> implements IQueue<T> {
 
