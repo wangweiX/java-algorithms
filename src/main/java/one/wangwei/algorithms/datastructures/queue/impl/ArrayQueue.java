@@ -39,7 +39,7 @@ public class ArrayQueue<T> implements IQueue<T> {
     }
 
     /**
-     * 添加元素到队列尾部
+     * 添加队尾元素
      *
      * @param value
      * @return
@@ -72,7 +72,7 @@ public class ArrayQueue<T> implements IQueue<T> {
     }
 
     /**
-     * 移除队列头部元素
+     * 移除队头元素
      *
      * @return
      */
@@ -116,7 +116,7 @@ public class ArrayQueue<T> implements IQueue<T> {
     }
 
     /**
-     * 查看队列头部元素值
+     * 查看队头元素
      *
      * @return
      */

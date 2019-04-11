@@ -21,7 +21,7 @@ public class LinkedQueue<T> implements IQueue<T> {
     }
 
     /**
-     * 添加元素到队列头部
+     * 添加队尾元素
      *
      * @param value
      * @return
@@ -41,7 +41,7 @@ public class LinkedQueue<T> implements IQueue<T> {
     }
 
     /**
-     * 移除队列尾部元素
+     * 移除队头元素
      *
      * @return
      */
@@ -61,7 +61,7 @@ public class LinkedQueue<T> implements IQueue<T> {
     }
 
     /**
-     * 查看队列尾部元素值
+     * 查看队头元素
      *
      * @return
      */

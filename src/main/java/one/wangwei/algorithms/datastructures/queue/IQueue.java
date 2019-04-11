@@ -10,7 +10,7 @@ package one.wangwei.algorithms.datastructures.queue;
 public interface IQueue<T> {
 
     /**
-     * 添加元素到队列尾部
+     * 添加队尾元素
      *
      * @param value
      * @return
@@ -18,14 +18,14 @@ public interface IQueue<T> {
     public boolean offer(T value);
 
     /**
-     * 移除队列尾部元素
+     * 移除队头元素
      *
      * @return
      */
     public T poll();
 
     /**
-     * 查看队列尾部元素值
+     * 查看队头元素
      *
      * @return
      */
