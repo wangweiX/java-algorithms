@@ -207,7 +207,7 @@ public class LinkedStack<T> implements IStack<T> {
         private Node<T> above;
         private Node<T> below;
 
-        public Node(T element) {
+        private Node(T element) {
             this.element = element;
         }
     }

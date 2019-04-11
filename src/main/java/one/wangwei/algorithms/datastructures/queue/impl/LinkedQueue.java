@@ -11,6 +11,13 @@ import one.wangwei.algorithms.datastructures.queue.IQueue;
  */
 public class LinkedQueue<T> implements IQueue<T> {
 
+    private int size = 0;
+    private Node<T> head;
+    private Node<T> tail;
+
+    public LinkedQueue() {
+    }
+
     /**
      * 添加元素到队列头部
      *
@@ -19,7 +26,16 @@ public class LinkedQueue<T> implements IQueue<T> {
      */
     @Override
     public boolean offer(T value) {
-        return false;
+        Node<T> last = tail;
+        Node<T> newNode = new Node<>(value, null);
+        tail = newNode;
+        if (last == null) {
+            head = newNode;
+        } else {
+            last.next = newNode;
+        }
+        size++;
+        return true;
     }
 
     /**
@@ -29,7 +45,14 @@ public class LinkedQueue<T> implements IQueue<T> {
      */
     @Override
     public T poll() {
-        return null;
+        if (head == null) {
+            return null;
+        }
+        Node<T> tmpHead = head;
+        head = head.next;
+        tmpHead.next = null;
+        size--;
+        return tmpHead.element;
     }
 
     /**
@@ -39,7 +62,10 @@ public class LinkedQueue<T> implements IQueue<T> {
      */
     @Override
     public T peek() {
-        return null;
+        if (head == null) {
+            return null;
+        }
+        return head.element;
     }
 
     /**
@@ -47,7 +73,14 @@ public class LinkedQueue<T> implements IQueue<T> {
      */
     @Override
     public void clear() {
-
+        for (Node<T> x = head; x != null; ) {
+            Node<T> next = x.next;
+            x.element = null;
+            x.next = null;
+            x = next;
+        }
+        head = tail = null;
+        size = 0;
     }
 
     /**
@@ -55,6 +88,25 @@ public class LinkedQueue<T> implements IQueue<T> {
      */
     @Override
     public int size() {
-        return 0;
+        return size;
+    }
+
+    /**
+     * Node
+     *
+     * @param <T>
+     */
+    private static class Node<T> {
+        private T element;
+        private Node<T> next;
+
+        private Node(T element) {
+            this.element = element;
+        }
+
+        private Node(T element, Node<T> next) {
+            this.element = element;
+            this.next = next;
+        }
     }
 }

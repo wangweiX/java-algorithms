@@ -279,7 +279,7 @@ public class DoublyLinkedList<T> implements IList<T> {
         private Node<T> prev;
         private Node<T> next;
 
-        public Node(Node<T> prev, T element, Node<T> next) {
+        private Node(Node<T> prev, T element, Node<T> next) {
             this.element = element;
             this.prev = prev;
             this.next = next;

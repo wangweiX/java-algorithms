@@ -316,7 +316,7 @@ public class SinglyCircularLinkedList<T> implements IList<T> {
         private T element;
         private Node<T> next;
 
-        public Node(T element, Node<T> next) {
+        private Node(T element, Node<T> next) {
             this.element = element;
             this.next = next;
         }

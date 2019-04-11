@@ -318,7 +318,7 @@ public class DoublyCircularLinkedList<T> implements IList<T> {
         private Node<T> prev;
         private Node<T> next;
 
-        public Node(T element, Node<T> prev, Node<T> next) {
+        private Node(T element, Node<T> prev, Node<T> next) {
             this.element = element;
             this.prev = prev;
             this.next = next;

@@ -349,7 +349,7 @@ public class SingleLinkedList<T> implements IList<T> {
         private Node<T> next;
         private T element;
 
-        public Node(Node<T> next, T element) {
+        private Node(Node<T> next, T element) {
             this.next = next;
             this.element = element;
         }
