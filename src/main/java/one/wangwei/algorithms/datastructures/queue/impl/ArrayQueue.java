@@ -159,8 +159,10 @@ public class ArrayQueue<T> implements IQueue<T> {
      *
      * @return
      */
-    private boolean isEmpty() {
+    public boolean isEmpty() {
         return size() <= 0;
     }
+
+
 
 }
