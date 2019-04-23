@@ -39,7 +39,7 @@ public class ArrayStack<T> implements IStack<T> {
         }
         array[size] = value;
         size++;
-        return false;
+        return true;
     }
 
     /**
